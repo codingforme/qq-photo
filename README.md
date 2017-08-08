@@ -1,8 +1,8 @@
 # jquery图片查看的插件
+2015-11-29
 最近做了一个jquery图片查看的插件，目的是能精确查看图片的详情，插件支持图片旋转、放大、缩小、拖拽、缩略图显示，界面效果是按照window的qq查看图片功能写的，当然不尽相同。
 
 具体功能：
-
 1. 多张图片切换，键盘左右键或左右箭头切换
 1. 旋转
 1. 放大，支持鼠标滚轮
@@ -11,4 +11,10 @@
 1. 拖拽大图
 1. 全屏
 
-PS: 详情可以看我博客介绍 [http://www.cnblogs.com/lovesong/p/5004951.html]( http://www.cnblogs.com/lovesong/p/5004951.html)
+2016-03-12 修复问题
+1. 修复了拖拽不平滑问题。
+2. 对Firefox、Chrome、Safari、IE9+进行兼容。
+
+PS：
+暂时没有考虑兼容IE9以下。
+详情可以看我博客介绍 [http://www.cnblogs.com/lovesong/p/5004951.html]( http://www.cnblogs.com/lovesong/p/5004951.html)
