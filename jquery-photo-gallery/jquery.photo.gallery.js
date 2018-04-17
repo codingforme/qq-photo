@@ -34,7 +34,8 @@ $.fn.extend({
 								 	'<span class="oper_fullscreen" title="查看全屏"><i class="icon_tool-fullscreen"></i></span>' +
 									'<span class="oper_bigger" title="放大图片"><i class="icon_tool-bigger"></i></span>' +
 									'<span class="oper_smaller" title="缩小图片"><i class="icon_tool-smaller"></i></span>' +
-									'<span class="oper_rotate" title="向右旋转"><i class="icon_tool-rotate"></i></span>' +
+									'<span class="oper_rotate_left" title="向左旋转"><i class="icon_tool-rotate_left"></i></span>' +
+                  '<span class="oper_rotate_right" title="向右旋转"><i class="icon_tool-rotate_right"></i></span>' +
 				     				'<span class="oper_download" title="下载图片"><i class="icon_tool-download"></i></span>' +
 								'</div>' +
 							 '</div>',
@@ -57,7 +58,8 @@ $.fn.extend({
 			$fullscreen = $(this).find(".oper_fullscreen"),
 			$bigger = $(this).find(".oper_bigger"),
 			$smaller =  $(this).find(".oper_smaller"),
-			$rotate = $(this).find(".oper_rotate"),
+			$rotate_left = $(this).find(".oper_rotate_left"),
+      $rotate_right = $(this).find(".oper_rotate_right"),
 			$download = $(this).find(".oper_download"),
 			$prev = $(this).find(".prev"),
 			$next = $(this).find(".next"),
@@ -268,26 +270,57 @@ $.fn.extend({
 			smallerImage();
   	  	});
   	  
-  	  	//旋转
-  	  	$rotate.on("click", function(){
-  	  	
-  	  		var rotateClass = $image.attr("class").match(/(rotate)(\d*)/);
+      //左旋转
+      $rotate_left.on("click", function(){
+        
+        var rotateClass = $image.attr("class").match(/(rotate)(-?)(\d*)/);
+        // 是否已经进行了旋转，是则计算周期，继续旋转
+        if(rotateClass){
+          // 如果不存在-号，则为右旋转转左旋转，要顺接右旋转状态
+          if (!rotateClass[2]) {
+            rotateClass[3] = parseInt(rotateClass[3]) + 180
+          }
+          var nextDeg = (rotateClass[3] * 1 + 90) % 360;
+      $image.removeClass(rotateClass[0]).addClass("rotate-" + nextDeg);
+          $thumbImg.removeClass(rotateClass[0]).addClass("rotate-" + nextDeg);
+          resizeImage(nextDeg);
+          resizeThumbImg(nextDeg);
+          isVertical = nextDeg == 90 || nextDeg == 270;
+        } else{   // 否则添加一个初始旋转的rotate
+          $image.addClass("rotate-90");
+          $thumbImg.addClass("rotate-90");
+          resizeImage("90");
+          resizeThumbImg("90");
+          isVertical = true;
+        }
+      });
 
-  	  		if(rotateClass){
-  	  			var nextDeg = (rotateClass[2] * 1 + 90) % 360;
-				$image.removeClass(rotateClass[0]).addClass("rotate" + nextDeg);
-  	  			$thumbImg.removeClass(rotateClass[0]).addClass("rotate" + nextDeg);
-  	  			resizeImage(nextDeg);
-  	  			resizeThumbImg(nextDeg);
-  	  			isVertical = nextDeg == 90 || nextDeg == 270;
-  	  		} else{
-  	  			$image.addClass("rotate90");
-  	  			$thumbImg.addClass("rotate90");
-  	  			resizeImage("90");
-  	  			resizeThumbImg("90");
-  	  			isVertical = true;
-  	  		}
-  	  	});
+      //右旋转
+      $rotate_right.on("click", function(){
+
+        var rotateClass = $image.attr("class").match(/(rotate)(-?)(\d*)/);
+        if(rotateClass){
+          // 如果存在-号，则为左旋转转右旋转，要顺接左旋转状态
+          if (rotateClass[2]) {
+            rotateClass[3] -= 180 
+          }
+          var nextDeg = (rotateClass[3] * 1 + 90) % 360;
+      $image.removeClass(rotateClass[0]).addClass("rotate" + nextDeg);
+          $thumbImg.removeClass(rotateClass[0]).addClass("rotate" + nextDeg);
+          // nextDeg取绝对值，防止左旋转然后右旋转顺接时， nextDeg为负数的情况
+          nextDeg = Math.abs(nextDeg)
+          resizeImage(nextDeg);
+          resizeThumbImg(nextDeg);
+          isVertical = nextDeg == 90 || nextDeg == 270;
+        } else{
+          $image.addClass("rotate90");
+          $thumbImg.addClass("rotate90");
+          resizeImage("90");
+          resizeThumbImg("90");
+          isVertical = true;
+        }
+      });
+
 
   	  	//下载
   	 	$download.on("click", function(){

@@ -78,10 +78,15 @@ i{
     height: 19px;
 	background-image: url('icon/smaller.png');
 }
-.icon_tool-rotate{
+.icon_tool-rotate_left{
     width: 17px;
     height: 20px;
-	background-image: url('icon/rotate.png');
+  background-image: url('icon/rotate_left.png');
+}
+.icon_tool-rotate_right{
+    width: 17px;
+    height: 20px;
+  background-image: url('icon/rotate_right.png');
 }
 .icon_tool-download{
     width: 16px;
@@ -98,23 +103,51 @@ i{
     height: 38px;
 	background-image: url('icon/next.png');
 }
-/* 效果 */
-.rotate0{ 
-	transform: rotate(0deg); 
-	-webkit-transform: rotate(0deg); 
+/* 右旋转 */
+.rotate0, .rotate-0{ 
+  transform: rotate(0deg); 
+    -webkit-transform: rotate(0deg); 
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
 } 
 .rotate90{ 
-	transform: rotate(90deg); 
-	-webkit-transform: rotate(90deg); 
+  transform: rotate(90deg); 
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
 } 
 .rotate180{ 
-	transform: rotate(180deg); 
-	-webkit-transform: rotate(180deg); 
+  transform: rotate(180deg); 
+    -webkit-transform: rotate(180deg); 
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
 } 
 .rotate270{ 
-	transform: rotate(270deg); 
-	-webkit-transform: rotate(270deg); 
+  transform: rotate(270deg); 
+    -webkit-transform: rotate(270deg); 
+    -ms-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
 } 
+
+/* 左旋转 */
+.rotate-90{ 
+  transform: rotate(-90deg); 
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+} 
+.rotate-180{ 
+  transform: rotate(-180deg); 
+    -webkit-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+} 
+.rotate-270{ 
+  transform: rotate(-270deg); 
+    -webkit-transform: rotate(-270deg);
+    -ms-transform: rotate(-270deg);
+    -moz-transform: rotate(-270deg); 
+}
 
 .gallery{
 	width: 100%;
